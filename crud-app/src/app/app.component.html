@@ -3,16 +3,13 @@
       <mat-toolbar-row>
         <span>Employee CRUD App</span>
         <span class="example-spacer"></span>
-        <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon"
-        (click)="onAdd()">
+        <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
           <mat-icon>menu</mat-icon>
         </button>
       </mat-toolbar-row>
     </mat-toolbar>
   </p>
-<div class="example-button-row">
-<button mat-raised-button color="primary" (click)="onAdd()">Add Employee</button>
-</div>
+
  
 <!-- <table class="table table-bordered">
     <tr>
@@ -29,5 +26,5 @@
     </tr>
   </table> -->
 
-  <app-main></app-main>
+  <app-main *ngIf=!addEmp></app-main>
 <router-outlet></router-outlet>

@@ -10,26 +10,18 @@ import { Router } from '@angular/router';
 })
 export class AppComponent {
   title = 'crud-app';
-  employeeData = [];
   url = 'https://jsonplaceholder.typicode.com/users';
 
   displayedColumns: string[] = ['id', 'name', 'username', 'email'];
   dataSource: any;
+  addEmp : boolean = false;
 
   constructor(private http: HttpClient,
     public router: Router){
       this.getEmployeeData().subscribe((response: any)=>{
         // console.log(response)
-        this.dataSource= response;
-          
-            console.log(this.employeeData)
-            
+        this.dataSource= response;            
           });
-  }
-
-  onAdd(){
-    console.log("Add Employee");
-    this.router.navigate(['/add']);
   }
 
   getEmployeeData(): Observable<any>  {
