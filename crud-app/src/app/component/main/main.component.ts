@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { ActionDialogComponent } from '../action-dialog/action-dialog.component';
 import { MatTable } from '@angular/material/table';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-main',
@@ -13,7 +14,7 @@ import { MatTable } from '@angular/material/table';
 })
 export class MainComponent implements OnInit {
 
-  url = 'https://jsonplaceholder.typicode.com/users';
+  url = environment.user_api;
 
   displayedColumns: string[] = ['id', 'name', 'username', 'email','action'];
   dataSource: any;
@@ -24,7 +25,6 @@ export class MainComponent implements OnInit {
     public router: Router,
     public dialog: MatDialog){
       this.getEmployeeData().subscribe((response: any)=>{
-        // console.log(response)
         this.dataSource= response;            
           });
   }
@@ -36,14 +36,6 @@ export class MainComponent implements OnInit {
     return this.http.get<any>(this.url);
   }
 
-  // postEmployeeData(emp)
-  // {
-  //   return this.http.post(this.url, emp);
-  // }
-  // updateEmployeeData(emp) {
-  //   return this.http.put(this.url + '/' + emp.id, emp);
-  // }
-
   openDialog(action: any,obj: any) {
     obj.action = action;
 
@@ -51,13 +43,8 @@ export class MainComponent implements OnInit {
       width: '250px',
       data:obj
     });
-
-
     dialogRef.afterClosed().subscribe((result: { event: string; data: any; }) => {
-      console.log("After closed--", result)
       if(result.event == 'Add'){
-        console.log("Add Main")
-        console.log(result.data)
         this.addRowData(result.data);
       }else if(result.event == 'Update'){
         this.updateRowData(result.data);
@@ -67,7 +54,7 @@ export class MainComponent implements OnInit {
     });
   }
 
-  // addRowData(){
+  // onAdd(){
   //   console.log("Add Employee");
   //   //this.router.navigate(['/add']);
   // }
